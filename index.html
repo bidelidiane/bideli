@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        padding:0px;
+        margin:0px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    body{
+        background-color: whitesmoke;
+    }
+    .container{
+        background-color: white;
+        position: relative;
+        top:200px;
+        left:500px;
+        width:500px;
+        height: 300px;
+        padding:20px;
+        border-radius:30px;
+        box-shadow: 0 0 10px black;
+    }
+    .container label{
+        display: block;
+        font-size: x-large;
+    }
+    .container input{
+       width:200px; 
+    }
+    form{
+        position: relative;
+        left:50px;
+    }
+    .btn{
+        background-color: teal;
+        color:white;
+    }
+    .btn:hover{
+        cursor:pointer;
+        transition: 0.5s;
+        background-color: green;
+    }
+</style>
+<body>
+<div class="container">
+        <form method="POST">
+            <h1>LOGIN</h1>
+            <label>adminname:</label>
+            <input type="text"name="adminname"placeholder="enter adminname"><br>
+            <label>password:</label>
+            <input type="password"name="password"placehoder="enter password"><br><br>
+            <input type="submit"name="login"value="login"class="btn"><br><br>
+            <p>do you have an account<a href="login.php"></a></p>
+             <?php
+             include 'connect.php';
+             if(isset($_POST['login'])){
+                $adminname=$_POST['adminname'];
+                $password=$_POST['password'];
+                $query=$conn->query("SELECT * FROM admin WHERE adminname='$adminname'AND password='$password'");
+                $login=mysqli_num_rows($query);
+                if($query){
+                    echo"<script>alert('welcom');window.location.replace('select.php')
+                    ;</script>";
+                }else{
+                    echo"failed";
+                }
+             }
+             ?>   
+        </form>
+    </div>
+</body>
+</html>
